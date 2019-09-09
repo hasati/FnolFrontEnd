@@ -1,0 +1,57 @@
+
+.panel-heading span
+{
+             margin-top: -10px;
+            font-size: 15px;
+            margin-right: -12px;
+}
+.clickable {
+             background: rgba(0, 0, 0, 0.15);
+             display: inline-block;
+             padding: 6px 12px;
+             border-radius: 4px;
+             cursor: pointer;
+}
+.table { 
+           width: 100%; 
+}
+ .btn-lg{
+           width: 100px;
+           height: 36px;
+           font-size: 13px;
+ }
+#DriverDetailsPanel{
+           display:none;
+}
+.input-group{
+           width:70%
+}
+.form-control{
+          width:70%;
+          border-radius: 4px;
+}
+
+body{
+
+         margin: 70px;
+}
+label.error {
+	     color: #a94442;
+		 width: 100%;
+         position: absolute;
+	    top: 34px;
+	    padding: 2px 5px;
+		right: -40px;
+}
+.row{
+         padding-bottom: 14px !important;
+}
+#VechicleDetailsPanel{
+        display:none;
+}
+
+
+mark {
+  color: red;
+background-color: lavender;
+}

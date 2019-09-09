@@ -1,0 +1,69 @@
+	<form id="insruedForm">
+		<div class="col-sm-12">
+			<div class="panel panel-primary" style="background-color: lavender;">
+				<div class="panel-heading" style="height: 36px;">Hi
+					{{insuredPersonName}}</div>
+				<div class="container">
+					<br />
+					<div class="row">
+
+						<div class="col-sm-4 form-group">
+							<label for="name">Case Number:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span> <input type="text"
+									class="form-control" id="caseNumber" ng-model="caseNumber"
+									readonly>
+							</div>
+						</div>
+						
+							<div class="col-sm-4 form-group">
+							<label for="name">First Name:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span> <input type="text"
+									class="form-control" id="firstName" ng-model="firstName"
+									readonly>
+							</div>
+							
+						</div>
+							<div class="col-sm-4 form-group">
+							<label for="name">Last Name:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span> <input type="text"
+									class="form-control" id="lastName" ng-model="lastName"
+									readonly>
+							</div>
+						</div>
+						
+						<div class="col-sm-4 form-group">
+							<label for="name"><mark>*</mark>Phone Number:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span> <input type="text"
+									class="form-control" id="insuredPersonPhoneNumber"
+									placeholder="Enter Phone Number"
+									name="insuredPersonPhoneNumber"
+									ng-model="insuredPersonPhoneNumber"
+									ng-disabled="insuredDetails" maxlength="10">
+							</div>
+						</div>
+						<div class="col-sm-4 form-group">
+							<label for="date"><mark>*</mark> DOB:</label>
+							<div id="datepicker" class="input-group date"
+								data-date-format="mm-dd-yyyy" ng-model="dob">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-calendar"></i></span> <input
+									class="form-control" type="date" name="insuredPeronsdob"
+									ng-model="insuredPeronsdob"
+									ng-change="ageCalculation(insuredPeronsdob,'#warningMsg')"
+									ng-disabled="insuredDetails">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</form>

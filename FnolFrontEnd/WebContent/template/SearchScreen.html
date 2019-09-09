@@ -1,0 +1,116 @@
+	
+		<div>
+			<div class="panel panel-primary" style="background-color: lavender;" >
+				<div class="panel-heading" style="height: 36px;">Person Details</div>
+					<div class="container">	
+						
+						<div class="row">
+						<br/>
+                            <div class="col-sm-4 form-group">
+                                <label for="name"> <mark>*</mark>Case Number:</label>
+								<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="text" class="form-control" id="caseNumber" name="caseNumber" placeholder="Enter Case Number"  maxlength="50" >
+								</div>
+                            </div>
+							
+							 <div class="col-sm-4 form-group">
+                                <label for="name"> <mark>*</mark>Policy Number:</label>
+								<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="text" class="form-control" id="policyNumber" name="policyNumber" placeholder="Enter Policy Number"  maxlength="50" >
+								</div>
+                            </div>
+							
+							 <div class="col-sm-4 form-group">
+                                <label for="name"> <mark>*</mark>Model:</label>
+								<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Enter City"  maxlength="50" >
+								</div>
+                            </div>
+						</div>
+						
+						<div class="row">
+			
+                            <div class="col-sm-4 form-group">
+                                <label for="name"> <mark>*</mark>Agent Name:</label>
+								<div class="input-group">
+                                {{agentName}}
+								</div>
+                            </div>
+							
+							 <div class="col-sm-4 form-group">
+                                <label for="name"> <mark>*</mark>Policy Effective Date:</label>
+								<div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy" ng-model="policyEffectiveDate">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                <input class="form-control" type="date" name="policyEffectiveDate" ng-model="policyEffectiveDate" >
+                                </div>
+                            </div>
+							
+							 <div class="col-sm-4 form-group">
+                                <label for="name"> <mark>*</mark>Policy Expiry Date:</label>
+								<div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy" ng-model="policyExpiryDate">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                <input class="form-control" type="date" name="policyExpiryDate" ng-model="policyExpiryDate" >
+                                </div>
+                            </div>
+						</div>
+						
+						<div class="col-sm-12">
+						 <div class="col-sm-6 form-group">
+                                <button type="submit" class="btn btn-lg btn-success btn-block" id="search" style="float:right;">Search</button>
+                         </div>
+						 <div class="col-sm-6 form-group">
+                                <button type="submit" class="btn btn-lg btn-success btn-block" id="reset" style="float:left;">Reset</button>
+                         </div>
+						</div>
+            </div>		
+		</div>
+	</div>	
+	
+			 
+					<div class="col-sm-12" id="searchResult" ng-app="myApp" style="padding: 0px;">
+						<div class="panel panel-primary" style="background-color: lavender;">
+						<div class="panel-heading" style="height: 36px;">Search Result</div>
+
+
+						<div class="table-responsive">
+							<table class="table table-striped" id="searchResult">
+
+								<tr>
+									<th>Firstname</th>
+									<th>Lastname</th>
+									<th style="    width: 15%;">Policy Number</th>
+									<th>Policy Effective Date</th>
+									<th>Policy Expiry Date</th>
+									<th style="    width: 15%;">Model</th>
+									<th>Model Year</th>
+									<th>Edit</th>
+									<th>View</th>
+								</tr>
+								<tr ng-repeat="a in [1,2,3,4,5,6,7,8,9,10,11,12,13]">
+									<td>Himanshu</td>
+									<td>Asati</td>
+									<td>123AA456AA</td>
+									<td>29-05-1993</td>
+									<td>29-05-1994</td>
+									<td>AAABAA</td>
+									<td>2018</td>
+									<td><button type='submit'
+											class='btn btn-lg btn-success btn-block'
+											ng-click='viewData($index)' data-toggle='modal'
+											data-target='#myModal' style="padding: 0px;height: 22px;width: 100%;">Edit</button>
+									<td><button type='submit'
+											class='btn btn-lg btn-success btn-block'
+											ng-click='deleteRow($index)' style="padding: 0px;height: 22px;width: 100%;">View</button></td>
+								</tr>
+								<tr>
+									<td colspan="3" style="text-align: right;"><button class="btn btn-sm btn-success" id="reset">< Prev</button></td>
+									<td colspan="2" style="text-align: center;vertical-align: middle;">Showing 1-20 of 120</td>
+									<td colspan="4" style="text-align: left;"><button class="btn btn-sm btn-success" id="reset">Next ></button></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div> 

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Driver Details</title>
+<script src="driver.js"></script>
+</head>
+<body>
+	<form id="insruedForm">
+		<div class="col-sm-12">
+			<div class="panel panel-primary" style="background-color: lavender;">
+				<div class="panel-heading" style="height: 36px;">Hi
+					{{insuredPersonName}}</div>
+				<div class="container">
+					<br />
+					<div class="row">
+
+						<div class="col-sm-4 form-group">
+							<label for="name">Case Number:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span> <input type="text"
+									class="form-control" id="caseNumber" ng-model="caseNumber"
+									readonly>
+							</div>
+						</div>
+						<div class="col-sm-4 form-group">
+							<label for="name"><mark>*</mark>Phone Number:</label>
+							<div class="input-group">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-user"></i></span> <input type="text"
+									class="form-control" id="insuredPersonPhoneNumber"
+									placeholder="Enter Phone Number"
+									name="insuredPersonPhoneNumber"
+									ng-model="insuredPersonPhoneNumber"
+									ng-disabled="insuredDetails" maxlength="10">
+							</div>
+						</div>
+						<div class="col-sm-4 form-group">
+							<label for="date"><mark>*</mark> DOB:</label>
+							<div id="datepicker" class="input-group date"
+								data-date-format="mm-dd-yyyy" ng-model="dob">
+								<span class="input-group-addon"><i
+									class="glyphicon glyphicon-calendar"></i></span> <input
+									class="form-control" type="date" name="insuredPeronsdob"
+									ng-model="insuredPeronsdob"
+									ng-change="ageCalculation(insuredPeronsdob,'#warningMsg')"
+									ng-disabled="insuredDetails">
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<p id="warningMsg" style="color: red; display: none;">{{warningMsg}}</p>
+					</div>
+					<div class="col-sm-2 form-group">
+						<button type="submit" class="btn btn-lg btn-success btn-block"
+							id="insuredPersonButton"
+							ng-click="validateInsuredPersonDetails()"
+							ng-disabled="insuredDetails">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+
+
+	<form  id="driverForm" ng-hide="displayDriverForm" >
+		<div class="col-sm-12">
+			<div class="panel panel-primary" style="background-color: lavender;">
+				<div class="panel-heading" style="height: 36px;">Driver
+					Personal Information</div>
+				<div class="container">
+					<div>
+						<div>
+							<br />
+							<div class="row" id="prefix">
+								<div class="col-sm-4 form-group">
+
+									<label for="gender">Prefix</label>
+									<div class="col-sm-13">
+										<select class="form-control" id="prefix"
+											ng-init="prefix ='Mr.'" ng-model="prefix">
+											<option>Mr.</option>
+											<option>Miss</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4 form-group">
+									<label for="name"> <mark>*</mark> First Name:
+									</label>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-user"></i></span> <input type="text"
+											class="form-control" id="firstname" name="firstname"
+											placeholder="Enter First Name" maxlength="30"
+											ng-model="firstName">
+									</div>
+								</div>
+								<div class="col-sm-4 form-group">
+									<label for="name"> Middle Name:</label>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-user"></i></span> <input type="text"
+											class="form-control" id="middlename"
+											placeholder="Enter Middle Name" name="middlename"
+											maxlength="30" ng-model="middleName">
+									</div>
+								</div>
+								<div class="col-sm-4 form-group">
+									<label for="name"> <mark>*</mark>Last Name:
+									</label>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-user"></i></span> <input type="text"
+											class="form-control" id="lastname" name="lastname"
+											placeholder="Entere Last Name" maxlength="30"
+											ng-model="lastName">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4 form-group">
+									<label for="email"><mark>*</mark> Email:</label>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-envelope"></i></span> <input type="email"
+											class="form-control" id="email" placeholder="xyz@example.com"
+											name="email" maxlength="30" ng-model="emialId">
+									</div>
+								</div>
+								<div class="col-sm-4 form-group">
+									<label for="date"><mark>*</mark> DOB:</label>
+									<div id="datepicker" class="input-group date"
+										data-date-format="mm-dd-yyyy" ng-model="dob">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-calendar"></i></span> <input
+											class="form-control" type="date" name="dob" ng-model="dob"
+											ng-change="ageCalculation(dob,'driverWarningMsg')"
+											ng-model="dob">
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+
+								<div class="col-sm-4 form-group">
+
+									<label for="gender"><mark>*</mark>Gender</label>
+									<div class="col-sm-13">
+										<select class="form-control" id="gender" ng-init="gender ='M'"
+											ng-model="gender">
+											<option value="M">Male</option>
+											<option value="F">Female</option>
+										</select>
+
+									</div>
+
+								</div>
+
+								<div class="col-sm-4 form-group">
+									<label for="email">Marital Status:</label>
+									<div class="col-sm-13">
+										<select class="form-control" id="MaritalStatus"
+											ng-init="marriageStatus ='M'" ng-model="marriageStatus">
+											<option value="M">Married</option>
+											<option value="UM">Unmarried</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-sm-4 form-group">
+									<label for="email">Relation to Insured</label>
+									<div class="col-sm-13">
+
+										<select class="form-control" id="InsuredRelation"
+											ng-model="relation" ng-init="relation ='SE'">
+											<option value="SE">Self</option>
+											<option value="FA">Father</option>
+											<option value=MO">Mother</option>
+											<option value="BO">Bother</option>
+											<option value="SP">Spouse</option>
+											<option value="SI">Sister</option>
+											<option value="WI">Wife</option>
+										</select>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-4 form-group">
+									<label for="email">License Status:</label>
+									<div class="col-sm-13">
+
+										<select class="form-control" id="LicenseStaus"
+											name="licenseStatus" ng-model="licenseStatus"
+											ng-init="licenseStatus ='V'">
+											<option value="V">Valid</option>
+											<option value="NV">Not Valid</option>
+										</select>
+									</div>
+								</div>
+
+
+								<div class="col-sm-4 form-group">
+									<label for="email">Driver Status:</label>
+									<div class="col-sm-13">
+
+										<select class="form-control" id="DriverStatus"
+											ng-model="driverStatus" ng-init="driverStatus ='R'">
+											<option value="R">Rated</option>
+											<option value="NR">Not Rated</option>
+										</select>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-4 form-group">
+									<label for="experience"><mark>*</mark>Year of
+										Experience:</label>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+											class="form-control" id="drivingExperience"
+											name="drivingExperience" placeholder="Experience:1,2"
+											name="drivingExperience" maxlength="4"
+											ng-model="drivingExperience">
+									</div>
+								</div>
+								<div class="col-sm-4 form-group">
+									<label for="license"><mark>*</mark>License Number:</label>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+											class="form-control" id="licensenumber" name="licensenumber"
+											placeholder="X45525Y26" maxlength="10"
+											ng-model="licenseNumber">
+									</div>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div class="col-sm-4 form-group">
+									<label for="integer"><mark>*</mark>Traffic Voliation:</label>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+											class="form-control" id="trafficevoilation"
+											name="trafficevoilation" maxlength="2"
+											ng-model="trafficVoliation">
+									</div>
+								</div>
+								<div class="col-sm-4 form-group">
+
+									<label for="integer"><mark>*</mark>Traffic Accident:</label>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+											class="form-control" id="trafficaccident"
+											name="trafficeaccident" maxlength="2"
+											ng-model="trafficAccident">
+									</div>
+								</div>
+							</div>
+
+
+
+
+							<div class="row">
+								<div class="col-sm-4 form-group">
+									<label for="integer"><mark>*</mark>VIN:</label>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+											class="form-control" id="vechileVINNumber"
+											name="vechileVINNumber" maxlength="17"
+											ng-model="vechileVINNumber">
+									</div>
+
+								</div>
+								<div class="col-sm-4 form-group">
+									<label for="integer"><mark>*</mark>Make:</label>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+											class="form-control" id="vechicleCompany"
+											name="vechicleCompany" ng-model="vechicleCompany">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4 form-group">
+
+									<label for="integer"><mark>*</mark>Model:</label>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+											class="form-control" id="vechicleModel" name="vechicleModel"
+											ng-model="vechicleModel">
+									</div>
+								</div>
+
+
+								<div class="col-sm-4 form-group">
+									<label for="integer"><mark>*</mark>Model Year:</label>
+									<div id="datepicker" class="input-group date"
+										data-date-format="mm-dd-yyyy" ng-model="vechileModelYear">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-calendar"></i></span> <input
+											class="form-control" type="date" name="vechileModelYear"
+											ng-model="vechileModelYear">
+									</div>
+
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-4 form-group">
+
+									<label for="integer"><mark>*</mark>Vechicle Number:</label>
+									<div class="input-group">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+											class="form-control" id="vechicleNumber"
+											name="vechicleNumber" ng-model="vechicleNumber">
+									</div>
+
+								</div>
+							</div>
+
+							<div class="row">
+
+								<div class="col-sm-4 form-group">
+									<label for="myFileField"><mark>*</mark>Select a Adhaar
+										or Pan Card Copy: </label> <input type="file" fileinput="file"
+										filepreview="filepreview" class="form-control" />
+
+								</div>
+
+								<div class="col-sm-4 form-group">
+									<label for="myFileField"><mark>*</mark>Select a Driving
+										License Copy: </label> <input type="file" fileinput="file2"
+										filepreview="filepreview2" class="form-control" />
+								</div>
+
+								<div class="col-sm-4 form-group">
+									<label for="myFileField"><mark>*</mark>Select a
+										Vechicle Purchase Copy: </label> <input type="file" fileinput="file3"
+										filepreview="filepreview3" class="form-control" />
+								</div>
+							</div>
+
+
+							<div class="row">
+
+								<div class="col-md-4">
+									<img ng-src="{{filepreview}}" nclass="img-responsive"
+										ng-show="filepreview" ng-model="filepreview" height="160"
+										width="160" accept='image/*' />
+								</div>
+								<div class="col-md-4">
+									<img ng-src="{{filepreview2}}" class="img-responsive"
+										ng-show="filepreview2" ng-model="filepreview2" height="160"
+										width="160" accept='image/*' />
+								</div>
+								<div class="col-md-4">
+									<img ng-src="{{filepreview3}}" class="img-responsive"
+										ng-show="filepreview3" ng-model="filepreview3" height="160"
+										width="160" accept='image/*' />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<p id="driverWarningMsg"
+							style="color: red; display: none; margin-top: -33px;">{{driverWarningMsg}}</p>
+					</div>
+					<div class="col-sm-2 form-group">
+						<button type="submit" class="btn btn-lg btn-success btn-block"
+							id="add" ng-click="addDriverDetails()">Add</button>
+					</div>
+					<div class="col-sm-2 form-group">
+						<button class="btn btn-lg btn-success btn-block" id="btnContactUs"
+							ng-click="submitDriverDetails()" disabled>Submit</button>
+					</div>
+
+				</div>
+
+
+			</div>
+
+		</div>
+		</div>
+		</div>
+	</form>
+	<!-- Table Section -->
+	<div class="col-sm-12" id="DriverDetailsPanel">
+		<div class="panel panel-primary" style="background-color: lavender;">
+			<div class="panel-heading" style="height: 36px;">Driver Details
+			</div>
+
+
+			<div class="table-responsive">
+				<table class="table table-striped" id="DriverDetails">
+
+					<tr>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Lincense Number</th>
+						<th>Model</th>
+						<th>Model Year</th>
+						<th>View/Edit</th>
+						<th>Delete</th>
+					</tr>
+					<tr ng-repeat="data in jsonData">
+						<td>{{data.firstName}}</td>
+						<td>{{data.lastName}}</td>
+						<td>{{data.licenseNumber}}</td>
+						<td>{{data.vechicleModel}}</td>
+						<td>{{data.vechileModelYear | date:'dd-MM-yyyy'}}</td>
+						<td><button type='submit'
+								class='btn btn-lg btn-success btn-block'
+								ng-click='viewData($index)' data-toggle='modal'
+								data-target='#myModal'>View/Edit</button>
+						<td><button type='submit'
+								class='btn btn-lg btn-success btn-block'
+								ng-click='deleteRow($index)'>Delete</button></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!--		<h2>JSON</h2>
+<pre id="result">
+</pre> -->
+
+	<!-- Modal Section -->
+
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="col-sm-12">
+
+					<div class="panel panel-primary" id="close"
+						style="background-color: lavender;">
+						<div class="panel-heading" style="height: 36px;">
+							Driver Details
+							<button type="button" class="close" ng-click="hide()"
+								data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+
+						<div class="container">
+							<div>
+								<div>
+									<br />
+									<form id="driverFormModal">
+										<div class="row" id="prefix">
+											<div class="col-sm-3 form-group">
+
+												<label for="gender">Prefix</label>
+												<div class="col-sm-13">
+													<select class="form-control" id="mPrefix"
+														ng-model="mPrefix">
+														<option>Mr.</option>
+														<option>Miss</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-3 form-group">
+												<label for="name"> <mark>*</mark> First Name:
+												</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-user"></i></span> <input type="text"
+														class="form-control" id="mFirstname" name="mFirstname"
+														placeholder="Enter First Name" maxlength="30"
+														ng-model="mFirstname">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label for="name"> Middle Name:</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-user"></i></span> <input type="text"
+														class="form-control" id="mMiddlename"
+														placeholder="Enter Middle Name" name="mMiddlename"
+														maxlength="30" ng-model="mMiddlename">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label for="name"> <mark>*</mark>Last Name:
+												</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-user"></i></span> <input type="text"
+														class="form-control" id="mLastname" name="mLastname"
+														placeholder="Entere Last Name" maxlength="30"
+														ng-model="mLastname">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-3 form-group">
+												<label for="email"><mark>*</mark> Email:</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-envelope"></i></span> <input
+														type="email" class="form-control" id="mEmailId"
+														placeholder="xyz@example.com" name="mEmailId"
+														maxlength="30" ng-model="mEmailId">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label for="date"><mark>*</mark> DOB:</label>
+												<div id="datepicker" class="input-group date"
+													data-date-format="mm-dd-yyyy" ng-model="mDob">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-calendar"></i></span> <input
+														class="form-control" type="date" name="mDob"
+														ng-model="mDob" ng-change="ageCalculation()">
+												</div>
+
+											</div>
+										</div>
+										<div class="row">
+
+											<div class="col-sm-3 form-group">
+
+												<label for="gender"><mark>*</mark>Gender</label>
+												<div class="col-sm-13">
+													<select class="form-control" id="mGender"
+														ng-model="mGender">
+														<option value="M">Male</option>
+														<option value="F">Female</option>
+													</select>
+
+												</div>
+
+											</div>
+
+											<div class="col-sm-3 form-group">
+												<label for="email">Marital Status:</label>
+												<div class="col-sm-13">
+													<select class="form-control" id="mMarriageStatus"
+														ng-model="mMarriageStatus">
+														<option value="M">Married</option>
+														<option value="UM">Unmarried</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-sm-3 form-group">
+												<label for="email">Relation to Insured</label>
+												<div class="col-sm-13">
+
+													<select class="form-control" id="mRelation"
+														ng-model="mRelation">
+														<option value="SE">Self</option>
+														<option value="FA">Father</option>
+														<option value=MO">Mother</option>
+														<option value="BO">Bother</option>
+														<option value="SP">Spouse</option>
+														<option value="SI">Sister</option>
+														<option value="WI">Wife</option>
+													</select>
+
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-sm-3 form-group">
+												<label for="email">License Status:</label>
+												<div class="col-sm-13">
+
+													<select class="form-control" id="mLicenseStatus"
+														name="mLicenseStatus" ng-model="mLicenseStatus">
+														<option value="V">Valid</option>
+														<option value="NV">Not Valid</option>
+													</select>
+												</div>
+											</div>
+
+
+											<div class="col-sm-3 form-group">
+												<label for="email">Driver Status:</label>
+												<div class="col-sm-13">
+
+													<select class="form-control" id="mDriverStatus"
+														ng-model="mDriverStatus">
+														<option value="R">Rated</option>
+														<option value="NR">Not Rated</option>
+													</select>
+
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-sm-3 form-group">
+												<label for="experience"><mark>*</mark>Year of
+													Experience:</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+														class="form-control" id="mDrivingExperience"
+														name="mDrivingExperience" placeholder="Experience:1,2"
+														maxlength="4" ng-model="mDrivingExperience">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+												<label for="license"><mark>*</mark>License Number:</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+														class="form-control" id="mLicensenumber"
+														name="mLicensenumber" placeholder="X45525Y26"
+														maxlength="10" ng-model="mLicensenumber">
+												</div>
+											</div>
+										</div>
+
+
+										<div class="row">
+											<div class="col-sm-3 form-group">
+												<label for="integer"><mark>*</mark>Traffic
+													Voliation:</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+														class="form-control" id="mTrafficevoilation"
+														name="mTrafficevoilation" maxlength="2"
+														ng-model="mTrafficevoilation">
+												</div>
+											</div>
+											<div class="col-sm-3 form-group">
+
+												<label for="integer"><mark>*</mark>Traffic Accident:</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+														class="form-control" id="mTrafficeAccident"
+														name="mTrafficeAccident" maxlength="2"
+														ng-model="mTrafficeAccident">
+												</div>
+											</div>
+										</div>
+
+
+
+
+										<div class="row">
+											<div class="col-sm-3 form-group">
+												<label for="integer"><mark>*</mark>VIN:</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+														class="form-control" id="mVechileVINNumber"
+														name="mVechileVINNumber" maxlength="17"
+														ng-model="mVechileVINNumber">
+												</div>
+
+											</div>
+											<div class="col-sm-3 form-group">
+												<label for="integer"><mark>*</mark>Make:</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+														class="form-control" id="mVechicleCompany"
+														name="mVechicleCompany" ng-model="mVechicleCompany">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-3 form-group">
+
+												<label for="integer"><mark>*</mark>Model:</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+														class="form-control" id="mVechicleModel"
+														name="mVechicleModel" ng-model="mVechicleModel">
+												</div>
+											</div>
+
+
+											<div class="col-sm-3 form-group">
+												<label for="integer"><mark>*</mark>Model Year:</label>
+												<div id="datepicker" class="input-group date"
+													data-date-format="mm-dd-yyyy" ng-model="vechileModelYear">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-calendar"></i></span> <input
+														class="form-control" type="date" name="mVechileModelYear"
+														ng-model="mVechileModelYear">
+												</div>
+
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-sm-3 form-group">
+
+												<label for="integer"><mark>*</mark>Vechicle Number:</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="glyphicon glyphicon-pencil"></i></span> <input type="text"
+														class="form-control" id="mVechicleNumber"
+														name="mVechicleNumber" ng-model="mVechicleNumber">
+												</div>
+
+											</div>
+										</div>
+
+										<div class="row">
+
+											<div class="col-sm-3 form-group">
+												<label for="myFileField"><mark>*</mark>Select a
+													Adhaar or Pan Card Copy: </label> <input type="file"
+													fileinput="mFile" filepreview="mFilepreview"
+													class="form-control" />
+
+											</div>
+
+											<div class="col-sm-3 form-group">
+												<label for="myFileField"><mark>*</mark>Select a
+													Driving License Copy: </label> <input type="file"
+													fileinput="mFile2" filepreview="mFilepreview2"
+													class="form-control" />
+											</div>
+
+											<div class="col-sm-3 form-group">
+												<label for="myFileField"><mark>*</mark>Select a
+													Vechicle Purchase Copy: </label> <input type="file"
+													fileinput="mFile3" filepreview="mFilepreview3"
+													class="form-control" />
+											</div>
+										</div>
+
+
+										<div class="row">
+
+											<div class="col-md-3">
+												<img ng-src="{{mFilepreview}}" nclass="img-responsive"
+													ng-show="mFilepreview" ng-model="mFilepreview" height="160"
+													width="160" accept='image/*' />
+											</div>
+											<div class="col-md-3">
+												<img ng-src="{{mFilepreview2}}" class="img-responsive"
+													ng-show="mFilepreview2" ng-model="mFilepreview2"
+													height="160" width="160" accept='image/*' />
+											</div>
+											<div class="col-md-3">
+												<img ng-src="{{mFilepreview3}}" class="img-responsive"
+													ng-show="mFilepreview3" ng-model="mFilepreview3"
+													height="160" width="160" accept='image/*' />
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+
+							<div class="col-sm-3">
+								<p id="warningMsgModal" style="color: red; display: none;"></p>
+							</div>
+							<div class="col-sm-3 form-group">
+								<button type="button" class="btn btn-lg btn-success btn-block"
+									id="save" ng-click="modelDataSave()">Save</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

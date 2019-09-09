@@ -1,0 +1,15 @@
+.smallColumns{
+	width:5%;
+	max-width: 5%;
+}
+.mediumColumns{
+	width:10%;
+	max-width: 10%;
+}
+.largeColumns{
+	width:20%;
+	max-width: 20%;
+}
+li span{
+	color:#fff;
+}
